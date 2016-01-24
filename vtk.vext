@@ -1,0 +1,8 @@
+modules:
+    vtk
+
+test_import:
+    vtk
+
+install_hints:
+    VTK was not found, install it in your system python.
