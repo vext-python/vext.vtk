@@ -1,20 +1,15 @@
 #!/usr/bin/env python
+
+from __future__ import print_function
+
 info="""
-<<<<<<< HEAD
 Allow use of system vtk from a virtualenv
 Should work on all platforms.
 
-=======
-Allow use of system Wx from a virtualenv
-Should work on all platforms.
-
-Qt support is currently experimental.
-
->>>>>>> 20073707247148f6bb5f789945edd811d12e814c
 report bugs to https://github.com/stuaxo/vext
 """
 
-version="0.5.11"
+version="0.5.15"
 vext_version="vext>=%s" % version
 
 
@@ -40,40 +35,23 @@ class Install(install):
         # if ran from some setup.py then vexts own setup will take care of this...
         #
         # TOOD - Move this code to a common place.
-<<<<<<< HEAD
         print("vext.vtk Install")
-=======
-        print("vext.gi Install")
->>>>>>> 20073707247148f6bb5f789945edd811d12e814c
         if sys.prefix == '/usr':
-            print "Not installing PTH file to real prefix"
+            print("Not installing PTH file to real prefix")
             return
         call(["pip", "install", vext_version])
         self.do_egg_install()
         self.execute(_post_install, [self], msg="Install vext files:")
 
 setup(
-<<<<<<< HEAD
     name='vext.vtk',
-    zip_safe=False,
-
-    cmdclass={
-          'install': Install,
-=======
-    name='vext.wx',
     version=version,
-    description='Use system wx from a virtualenv',
+    description='Use system VTK from a virtualenv',
     long_description=info,
 
     cmdclass={
         'install': Install,
->>>>>>> 20073707247148f6bb5f789945edd811d12e814c
     },
-
-    version=version,
-
-    description='Use system python packages in a virtualenv',
-    long_description=info,
 
     # The project's main homepage.
     url='https://github.com/stuaxo/vext',
@@ -106,7 +84,6 @@ setup(
     # What does your project relate to?
     keywords='virtualenv vext vtk',
 
-<<<<<<< HEAD
     # List run-time dependencies here.  These will be installed by pip when your
     # project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
@@ -114,8 +91,4 @@ setup(
     setup_requires=[vext_version, "setuptools>=0.18.8"],
     install_requires=[vext_version],
     data_files=[('', vext_files)]
-=======
-    setup_requires=["setuptools>=0.18.8"],
-    install_requires=[vext_version],
->>>>>>> 20073707247148f6bb5f789945edd811d12e814c
 )
