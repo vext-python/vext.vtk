@@ -2,16 +2,15 @@
 
 from __future__ import print_function
 
-info="""
+info = """
 Allow use of system vtk from a virtualenv
 Should work on all platforms.
 
 report bugs to https://github.com/stuaxo/vext
 """
 
-version="0.5.20"
-vext_version="vext>=%s" % version
-
+version = "0.7.0"
+vext_version = "vext>=%s" % version
 
 from glob import glob
 from subprocess import call
@@ -24,9 +23,11 @@ import sys
 
 vext_files = glob("*.vext")
 
+
 def _post_install(self):
     cmd = ["vext", "-e", "-i" + (" -i".join(vext_files))]
     call(cmd)
+
 
 class Install(install):
     def run(self):
@@ -40,8 +41,9 @@ class Install(install):
             print("Not installing PTH file to real prefix")
             return
         call(["pip", "install", vext_version])
-        self.do_egg_install()
-        self.execute(_post_install, [self], msg="Install vext files:")
+        install.run(self)
+        install.execute(self, _post_install, [self], msg="Install vext files:")
+
 
 setup(
     name='vext.vtk',
@@ -88,7 +90,7 @@ setup(
     # project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    setup_requires=[vext_version, "setuptools>=0.18.8"],
+    setup_requires=["setuptools>=0.18.8"],
     install_requires=[vext_version],
     data_files=[('', vext_files)]
 )
